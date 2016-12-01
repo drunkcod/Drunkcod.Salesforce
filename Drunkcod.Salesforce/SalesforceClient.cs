@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -12,8 +12,10 @@ namespace Drunkcod.Salesforce
 		readonly JsonSerializer json = new JsonSerializer();
 		readonly HttpClient http;
 
-		public static SalesforceClient Create(SalesforceTokenResponse login) {
+		public static SalesforceClient Create(SalesforceTokenResponse login, TimeSpan? timeout = null) {
 			var http = new HttpClient();
+			if(timeout.HasValue)
+				http.Timeout = timeout.Value;
 			http.BaseAddress = new Uri(login.InstanceUrl);
 			http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(login.TokenType, login.AccessToken);
 			return new SalesforceClient(http);

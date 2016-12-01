@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Drunkcod.Salesforce
 {
@@ -12,5 +13,11 @@ namespace Drunkcod.Salesforce
 	public class SalesforceQueryResult<T> : SalesforceQueryResult
 	{
 		[JsonProperty("records")] public T[] Records;
+	}
+
+	public class QueryResult<T>
+	{
+		[JsonProperty("totalSize")] public int TotalSize;
+		[JsonProperty("records")] public IEnumerable<T> Records;
 	}
 }
