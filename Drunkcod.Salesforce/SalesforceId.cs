@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Text;
 
@@ -34,6 +34,9 @@ namespace Drunkcod.Salesforce
 		}
 
 		public override string ToString() => value;
+
+		public static bool operator==(SalesforceId lhs, SalesforceId rhs) => lhs.value == rhs.value;
+		public static bool operator!=(SalesforceId lhs, SalesforceId rhs) => !(lhs == rhs);
 	}
 
 	public class SalesforceIdJsonConverter : JsonConverter
